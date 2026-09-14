@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مقارنة برامج المكافآت البنكية + حاسبة النقاط</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -303,6 +302,29 @@
   .sc-notes ul{ margin:9px 0 0; padding-right:18px; font-size:11.5px; color:var(--ink-soft); line-height:1.9; }
   @media (max-width:520px){ .spend-calc .sc-head, .spend-calc .sc-body{ padding-left:16px; padding-right:16px; } }
 
+  
+  /* ===== دعوة تسجيل الإيميل ===== */
+  .email-cta{ margin:26px 4px 0; border-radius:18px; border:1px solid var(--accent); background:var(--accent-soft); overflow:hidden;
+    padding:20px 22px; text-align:center; }
+  .email-cta .ec-ic{ font-size:26px; margin-bottom:8px; }
+  .email-cta h3{ font-family:"Cairo",sans-serif; font-weight:800; font-size:15.5px; margin:0 0 6px; color:var(--accent-ink); }
+  .email-cta p{ font-size:12.5px; color:var(--ink-soft); margin:0 auto 14px; max-width:460px; line-height:1.8; }
+  .ec-row{ display:flex; gap:8px; max-width:420px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
+  .ec-row input[type="email"]{
+    flex:1; min-width:200px; font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif; font-size:13.5px;
+    padding:10px 14px; border-radius:11px; border:1px solid var(--line); background:var(--paper-raised); color:var(--ink);
+  }
+  .ec-row input[type="email"]:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+  .ec-row button{
+    font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif; font-size:13.5px; font-weight:800;
+    padding:10px 20px; border-radius:11px; border:none; background:var(--accent); color:#fff; cursor:pointer; white-space:nowrap;
+  }
+  .ec-row button:hover{ background:var(--accent-ink); }
+  .ec-msg{ font-size:11.5px; color:var(--ink-soft); margin-top:10px; min-height:14px; }
+  .ec-msg.err{ color:var(--no); }
+  .ec-msg.ok{ color:var(--ok); }
+  @media (max-width:480px){ .email-cta{ padding:18px 16px; } }
+
   </style>
 </head>
 <body>
@@ -334,7 +356,7 @@
   <div class="spend-calc" id="spendCalc">
     <div class="sc-head">
       <div class="sc-title"><span class="ic">🧮</span><h2>كم نقطة تكسب فعليًا؟</h2></div>
-      <p class="sc-sub">اختاري البنك والبطاقة، وأدخلي صرفك الشهري بكل فئة — تطلع لك النقاط المحسوبة فعليًا على جداول النسب الرسمية (بدون العروض المؤقتة أو المكافآت الترحيبية أو حدود الفئات القصوى).</p>
+      <p class="sc-sub">اختر البنك والبطاقة، وأدخل صرفك الشهري بكل فئة — تطلع لك النقاط المحسوبة فعليًا على جداول النسب الرسمية (بدون العروض المؤقتة أو المكافآت الترحيبية أو حدود الفئات القصوى).</p>
     </div>
     <div class="sc-body">
       <div class="sc-row">
@@ -435,7 +457,7 @@
     });
     var resultsEl = document.getElementById('scResults');
     if (!anyInput){
-      resultsEl.innerHTML = '<div class="sc-empty">أدخلي مبلغ الصرف بالأعلى لعرض النقاط المتوقعة</div>';
+      resultsEl.innerHTML = '<div class="sc-empty">أدخل مبلغ الصرف بالأعلى لعرض النقاط المتوقعة</div>';
       return;
     }
     resultsEl.innerHTML = lines.join('') +
@@ -1744,6 +1766,39 @@
       </section>
     </div>
   </div>
+
+  
+  <div class="email-cta" id="emailCta">
+    <div class="ec-ic">✉️</div>
+    <h3>ما تفوّتك</h3>
+    <p>إذا حاب تطلع أول بأول على الأدوات الجديدة.. لا تنسى تسجل ايميلك لتصلك التحديثات الحصرية المهمة مباشرة</p>
+    <div class="ec-row">
+      <input type="email" id="ecEmail" placeholder="بريدك الإلكتروني" />
+      <button onclick="ecSubmit()">سجل</button>
+    </div>
+    <div class="ec-msg" id="ecMsg"></div>
+  </div>
+
+  <script>
+
+  function ecSubmit(){
+    var input = document.getElementById('ecEmail');
+    var msg = document.getElementById('ecMsg');
+    var email = input.value.trim();
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!re.test(email)){
+      msg.textContent = 'تأكد إن البريد الإلكتروني صحيح';
+      msg.className = 'ec-msg err';
+      return;
+    }
+    var subject = encodeURIComponent('تسجيل تحديثات - مكينة النقاط');
+    var body = encodeURIComponent('البريد الإلكتروني: ' + email);
+    window.location.href = 'mailto:its.aber.ai@gmail.com?subject=' + subject + '&body=' + body;
+    msg.textContent = 'فتحنا لك تطبيق البريد — أكمل إرسال الرسالة من هناك عشان يوصلنا تسجيلك';
+    msg.className = 'ec-msg ok';
+  }
+
+  </script>
 
   <div class="foot">
     <p>المصادر: ملف الشروط والأحكام المعتمد لكل بنك، بالإضافة إلى الصفحة الرسمية. (جدول نقاط البنك العربي الوطني لفئة "الحسابات" الرابعة اللي يعرضها البرنامج رسميًا — ملفها تحديدًا لم يعمل عند رفعه، ولم نتمكن من توثيقه لعطل فني في الموقع.)</p>
