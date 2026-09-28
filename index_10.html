@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أدوات عبير الرافعي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F5F1; --surface:#FFFFFF; --ink:#1E1C1A; --ink-soft:#6B6870;
+    --border:#E4E0D6; --accent:#A8763A; --accent-ink:#7C5623; --accent-soft:#F1ECE0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15151B; --surface:#1D1D25; --ink:#EDEBF2; --ink-soft:#A6A2B1;
+      --border:#33323D; --accent:#D9A857; --accent-ink:#F0C784; --accent-soft:#2C2415;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15151B; --surface:#1D1D25; --ink:#EDEBF2; --ink-soft:#A6A2B1;
+    --border:#33323D; --accent:#D9A857; --accent-ink:#F0C784; --accent-soft:#2C2415;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;
+    padding: 48px 20px 64px;
+  }
+  h1,h2,.eyebrow{ font-family:"Cairo",sans-serif; }
+
+  .wrap{ max-width: 720px; margin:0 auto; display:flex; flex-direction:column; gap:36px; }
+
+  header{ text-align:center; display:flex; flex-direction:column; gap:10px; }
+  .eyebrow{
+    display:inline-flex; align-self:center;
+    font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--accent-ink); background:var(--accent-soft); border:1px solid var(--accent);
+    border-radius:999px; padding:6px 16px;
+  }
+  h1{ font-size:30px; font-weight:800; margin:0; letter-spacing:-0.3px; }
+  header p{ margin:0; color:var(--ink-soft); font-size:14.5px; line-height:1.7; max-width:480px; margin-inline:auto; }
+
+  .list{ display:flex; flex-direction:column; gap:14px; }
+
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; display:flex; flex-direction:column; gap:10px;
+    text-decoration:none; color:inherit;
+    transition: border-color .15s, transform .15s;
+  }
+  .card:hover{ border-color:var(--accent); }
+  .card .top{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .card h2{ font-size:17px; font-weight:800; margin:0; }
+  .card .tag{
+    font-size:10.5px; font-weight:700; letter-spacing:0.5px;
+    color:var(--accent-ink); background:var(--accent-soft); border:1px solid var(--accent);
+    border-radius:999px; padding:4px 10px; white-space:nowrap;
+  }
+  .card p{ margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
+  .card .go{
+    font-size:13px; font-weight:700; color:var(--accent-ink);
+    display:flex; align-items:center; gap:6px; margin-top:4px;
+  }
+
+  footer{ text-align:center; font-size:12px; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">أدوات</span>
+    <h1>أدوات عبير الرافعي</h1>
+    <p>مجموعة أدوات تفاعلية، كل وحدة تحل مشكلة محددة بلا تسجيل ولا تعقيد.</p>
+  </header>
+
+  <div class="list">
+
+    <!-- ============================================================
+         قالب إضافة أداة جديدة: انسخي كتلة <a class="card">...</a> كاملة،
+         الصقيها هنا فوق باقي البطاقات، وغيّري: href، النص داخل tag،
+         h2، وسطر الوصف داخل <p>. لا تغيّري أي شي ثاني.
+         ============================================================ -->
+
+    <a class="card" href="developer-check/">
+      <div class="top">
+        <h2>فاحص المطور</h2>
+        <span class="tag">عقار</span>
+      </div>
+      <p>تحقق من جاهزية مطور عقاري قبل الشراء على الخارطة، مبني على بيانات منصة وافي.</p>
+      <span class="go">افتح الأداة ←</span>
+    </a>
+
+    <a class="card" href="makinat-noqat/">
+      <div class="top">
+        <h2>مكينة النقاط</h2>
+        <span class="tag">مالي</span>
+      </div>
+      <p>قارن أكثر من 11 برنامج مكافآت بنكية بمكان واحد، واحسب نقاطك الفعلية حسب صرفك الشهري.</p>
+      <span class="go">افتح الأداة ←</span>
+    </a>
+
+  </div>
+
+  <footer>عبير الرافعي</footer>
+
+</div>
+
+</body>
+</html>
